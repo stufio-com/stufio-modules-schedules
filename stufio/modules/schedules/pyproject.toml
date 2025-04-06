@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "stufio-modules-schedules"
+version = "0.1.0"
+description = "Schedules module for Stufio framework"
+authors = [{name = "Stufio Developer", email = "dev@stufio.com"}]
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+    "stufio-framework>=0.1.0",
+    "stufio-modules-events>=0.1.0",
+    "taskiq>=0.7.0",
+    "croniter>=1.3.0",
+    "pytz>=2021.3",
+]
+
+[project.urls]
+repository = "https://github.com/stufio-com/stufio-modules-schedules"
