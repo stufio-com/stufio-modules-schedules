@@ -1,10 +1,10 @@
-from pydantic import BaseModel
-from stufio.core.settings import ModuleSettings, get_settings
+from stufio.core.settings import ModuleSettings
+from stufio.core.config import get_settings
 
 settings = get_settings()
 
 
-class SchedulesSettings(ModuleSettings, BaseModel):
+class SchedulesSettings(ModuleSettings):
     """Settings for the schedules module."""
 
     # Scheduler settings

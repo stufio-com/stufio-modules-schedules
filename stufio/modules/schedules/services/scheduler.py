@@ -1,11 +1,7 @@
-import asyncio
 import logging
-from typing import Optional, Dict, Any, List
-from datetime import datetime, timedelta
 
 from stufio.core.config import get_settings
 from ..brokers.stufio_broker import StufioBroker
-from ..crud.crud_schedule import crud_schedule
 
 logger = logging.getLogger(__name__)
 settings = get_settings()

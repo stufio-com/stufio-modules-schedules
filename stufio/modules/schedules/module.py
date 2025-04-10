@@ -20,10 +20,6 @@ class SchedulesModule(ModuleInterface):
         """Register this module's routes with the FastAPI app."""
         app.include_router(router, prefix=self.routes_prefix)
 
-    def get_models(self) -> List[Any]:
-        """Return this module's database models."""
-        return [Schedule, ScheduleExecution]
-
     def get_middlewares(self) -> List[Tuple]:
         """Return middleware classes for this module."""
         return []

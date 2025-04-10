@@ -13,9 +13,7 @@ from taskiq.scheduler.scheduler import TaskiqScheduler
 from taskiq.scheduler.scheduled_task import ScheduledTask
 
 from stufio.core.config import get_settings
-from stufio.modules.events.event_bus import get_event_bus
-from stufio.modules.events.schemas.event_definition import EventDefinition
-from stufio.modules.events.schemas.base import ActorType
+from stufio.modules.events import get_event_bus, EventDefinition, ActorType
 
 from ..models.schedule import Schedule
 from ..crud.crud_schedule import crud_schedule
@@ -42,7 +40,7 @@ class StufioBroker(AsyncBroker):
         self.scheduler_interval = scheduler_interval
         self.scheduler_task = None
         self.running = False
-        self.scheduler = TaskiqScheduler(self)
+        self.scheduler = TaskiqScheduler(self, [])  # Pass empty list as sources
 
     async def startup(self) -> None:
         """Start the broker and initialize the event bus connection."""
@@ -50,10 +48,7 @@ class StufioBroker(AsyncBroker):
 
         logger.info("Starting StufioBroker")
 
-        # Initialize event bus connection
-        from stufio.modules.events.event_bus import event_bus
-
-        self.event_bus = event_bus
+        self.event_bus = get_event_bus()
 
         # Start the scheduler task
         self.running = True
