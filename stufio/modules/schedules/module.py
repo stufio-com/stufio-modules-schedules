@@ -26,6 +26,15 @@ class SchedulesModule(ModuleInterface):
 
     async def on_startup(self, app: StufioAPI) -> None:
         """Initialize module on application startup."""
+        import os
+
+        # Check if we're in testing mode and skip complex shutdown
+        is_testing = os.getenv("TESTING") == "1" or os.getenv("TESTING") == "true"
+
+        if is_testing:
+            logger.info("Running in testing mode - skipping schedules module shutdown")
+            return
+        
         try:
             # Initialize the scheduler service
             await scheduler_service.initialize()
@@ -35,6 +44,15 @@ class SchedulesModule(ModuleInterface):
 
     async def on_shutdown(self, app: StufioAPI) -> None:
         """Shutdown module."""
+        import os
+
+        # Check if we're in testing mode and skip complex shutdown
+        is_testing = os.getenv("TESTING") == "1" or os.getenv("TESTING") == "true"
+
+        if is_testing:
+            logger.info("Running in testing mode - skipping schedules module shutdown")
+            return
+
         try:
             # Shutdown the scheduler service
             await scheduler_service.shutdown()
