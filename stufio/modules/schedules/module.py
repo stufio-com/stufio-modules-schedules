@@ -4,15 +4,14 @@ import logging
 from stufio.core.module_registry import ModuleInterface
 from stufio.core.stufioapi import StufioAPI
 from .api import router
-from .models import Schedule, ScheduleExecution
-from .services.scheduler import scheduler_service
+from .services.analytics_service import analytics_service
 from .__version__ import __version__
 
 logger = logging.getLogger(__name__)
 
 
 class SchedulesModule(ModuleInterface):
-    """Module for scheduling events."""
+    """Module for three-tier scheduling events."""
 
     version = __version__
 
@@ -36,9 +35,9 @@ class SchedulesModule(ModuleInterface):
             return
         
         try:
-            # Initialize the scheduler service
-            await scheduler_service.initialize()
+            # Initialize analytics service (if needed)
             logger.info("Schedules module started successfully")
+            logger.info("Three-tier scheduler service available via API endpoints")
         except Exception as e:
             logger.error(f"Error initializing schedules module: {e}", exc_info=True)
 
@@ -54,8 +53,6 @@ class SchedulesModule(ModuleInterface):
             return
 
         try:
-            # Shutdown the scheduler service
-            await scheduler_service.shutdown()
             logger.info("Schedules module shut down successfully")
         except Exception as e:
             logger.error(f"Error shutting down schedules module: {e}", exc_info=True)

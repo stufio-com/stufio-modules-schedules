@@ -19,5 +19,4 @@ class CreateScheduleCollection(MongoMigrationScript):
         # Create schedule_executions collection if it doesn't exist
         if "schedule_executions" not in existing_collections:
             await db.create_collection("schedule_executions")
-
-        return True
+    

@@ -1,3 +1,4 @@
+from motor.core import AgnosticDatabase
 from stufio.core.migrations.base import MongoMigrationScript
 
 
@@ -7,7 +8,7 @@ class CreateScheduleIndexes(MongoMigrationScript):
     migration_type = "schema"
     order = 20
 
-    async def run(self, db):
+    async def run(self, db: AgnosticDatabase) -> None:
         # Create indexes for schedules collection
         await db.command(
             {
@@ -63,5 +64,3 @@ class CreateScheduleIndexes(MongoMigrationScript):
                 ],
             }
         )
-
-        return True
